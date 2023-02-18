@@ -1,0 +1,84 @@
+﻿@model IndexCatViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["Author"] = "Serhii Ruban";
+    var routeData = Context.GetRouteData();
+    string? breedName = routeData.Values["action"]?.ToString();
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+    @Html.ActionLink("Додати кота", "Create", routeValues: null, htmlAttributes: new {@class="btn btn-sm btn-warning", id="createBtn"})
+</p>
+<div class="pb-5">
+
+@*    <a asp-controller="Cats" asp-action="Search" asp-route-breedId="" class="btn btn-sm btn-info">All</a>
+    @foreach (var item in Model.BreedSL)
+    {
+        <a asp-controller="Cats" asp-action="Search" asp-route-breedName="@item.Text" class="btn btn-sm btn-info">@item.Text</a>
+    }
+*@    
+    <a asp-controller="Cats" asp-action="List" asp-route-breedId="" class="btn btn-sm btn-info">All</a>
+    @foreach(var item in Model.BreedSL)
+    {
+        <a asp-controller="Cats" asp-action="List" asp-route-breedName="@item.Text" class="btn btn-sm btn-info">@item.Text</a>
+    }
+</div>
+<form asp-action="Index" method="get">
+    <div class="row mb-5">
+        <div class="col col-md-4 col-12">
+            <select asp-for="BreedId"
+                    class="form-select bg-light text-dark"
+                    asp-items="@Model.BreedSL">
+                <option value="0">All</option>
+            </select>
+           
+        </div>
+        @*<div class="col col-md-4 col-12">
+        @Html.DropDownList("days", new SelectList(new[] {"monday", "tuesday", "wednesday"}), new {@class="form-select"} )
+        </div>*@
+        <div class="col col-md-4 col-12">
+            <input type="text"
+                   asp-for="Search"
+                   placeholder="Search in cat name..."
+                   class="form-control" />
+        </div>
+        <div class="col col-md-4 col-12">
+            <button type="submit" class="btn btn-outline-success">Seacrh</button>
+        </div>
+    </div>
+</form>
+<div class="row">
+    @foreach (CatDTO cat in Model.Cats)
+    {
+        <div class="col col-xl-3 col-lg-4 col-md-6 col-12 mb-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@cat.CatName</h5>
+                    <p class="card-text text-truncate">@cat.Description</p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            @Html.DisplayNameFor(model=> model.Cats.First().Breed!.BreedName) :
+                            @cat.Breed?.BreedName
+                        </small>
+                    </p>
+                </div>
+                <div class="btn-group btn-group-sm mb-2">
+                    <a asp-action="Details"
+                    asp-route-id="@cat.Id"
+                    class="btn btn-outline-success">Details</a>
+                    <a asp-action="Edit"
+                   asp-route-id="@cat.Id"
+                   class="btn btn-outline-warning">Edit</a>
+                    <a asp-action="Delete"
+                   asp-route-id="@cat.Id"
+                   class="btn btn-outline-danger">Delete</a>
+                </div>
+                <img src="data:image/*;base64,@(Convert.ToBase64String(cat.Image!))" class="card-img-bottom" alt="@cat.CatName">
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_Meeting_8", "ASP_Meeting_8\ASP_Meeting_8.csproj", "{9C10D2D7-0A11-4B87-87F4-99AB371457F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C10D2D7-0A11-4B87-87F4-99AB371457F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C10D2D7-0A11-4B87-87F4-99AB371457F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C10D2D7-0A11-4B87-87F4-99AB371457F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C10D2D7-0A11-4B87-87F4-99AB371457F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50F47154-F017-4AFF-994A-DFEC18072C0D}
+	EndGlobalSection
+EndGlobal
