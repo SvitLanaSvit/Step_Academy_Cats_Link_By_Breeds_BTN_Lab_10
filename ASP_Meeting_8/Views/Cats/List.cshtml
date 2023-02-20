@@ -1,6 +1,17 @@
 ﻿@model IndexCatViewModel
+@addTagHelper *, ASP_Meeting_8
+
 @{
+    var routeData = Context.GetRouteData();
+    string? breedName = routeData.Values["breedName"]?.ToString();
+
+    List<string> breedsData = Model.BreedSL.Select(t =>  t.Text).ToList();
+    
 }
+
+<div class="pb-3">
+   <breed-index asp-action="List" asp-controller="Cats" breeds-data="@breedsData!" current-breed-id="@breedName"></breed-index>
+</div>
 
 <div class="row">
     @foreach (CatDTO cat in Model.Cats)

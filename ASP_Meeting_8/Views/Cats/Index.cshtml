@@ -1,10 +1,20 @@
 ﻿@model IndexCatViewModel
+@addTagHelper *, ASP_Meeting_8
 
 @{
     ViewData["Title"] = "Index";
     ViewData["Author"] = "Serhii Ruban";
     var routeData = Context.GetRouteData();
-    string? breedName = routeData.Values["action"]?.ToString();
+    string? breedName = routeData.Values["breedName"]?.ToString();
+
+    List<string> breeds = Model.BreedSL.Select(t => t.Text).ToList();
+    //-------------------------------------------------------------------
+    //List<BreedDTO?> breedsData = Model.Cats.Select(t => t.Breed).ToList();
+    //int currentBreedId = 0;
+    //if (routeData.Values["breedId"] != null)
+    //{
+    //    currentBreedId = int.Parse(routeData.Values["breedId"]?.ToString()!);
+    //}
 }
 
 <h1>Index</h1>
@@ -13,7 +23,7 @@
     <a asp-action="Create">Create New</a>
     @Html.ActionLink("Додати кота", "Create", routeValues: null, htmlAttributes: new {@class="btn btn-sm btn-warning", id="createBtn"})
 </p>
-<div class="pb-5">
+<div class="btn-group pb-3">
 
 @*    <a asp-controller="Cats" asp-action="Search" asp-route-breedId="" class="btn btn-sm btn-info">All</a>
     @foreach (var item in Model.BreedSL)
@@ -21,12 +31,22 @@
         <a asp-controller="Cats" asp-action="Search" asp-route-breedName="@item.Text" class="btn btn-sm btn-info">@item.Text</a>
     }
 *@    
-    <a asp-controller="Cats" asp-action="List" asp-route-breedId="" class="btn btn-sm btn-info">All</a>
+    <a asp-controller="Cats" asp-action="List" asp-route-breedId="" class="btn btn-sm btn-outline-info">All</a>
     @foreach(var item in Model.BreedSL)
     {
-        <a asp-controller="Cats" asp-action="List" asp-route-breedName="@item.Text" class="btn btn-sm btn-info">@item.Text</a>
+        <a asp-controller="Cats" asp-action="List" asp-route-breedName="@item.Text" class="btn btn-sm btn-outline-info">@item.Text</a>
     }
 </div>
+<p>With my tag_helper by breed_name:</p>
+<div class="pb-3">
+    <breed breeds="@breeds" current-breed="@breedName"></breed>
+</div>
+
+@*<p>With my tag_helper by index:</p>
+<div class="pb-3">
+   <breed-index asp-action="List"  asp-controller="Cats" breeds-data="@breedsData!" current-breed-id="@currentBreedId"></breed-index>
+</div>
+*@
 <form asp-action="Index" method="get">
     <div class="row mb-5">
         <div class="col col-md-4 col-12">
